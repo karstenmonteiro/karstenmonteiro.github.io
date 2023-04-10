@@ -13,7 +13,7 @@
 </head>
 <body>
     <!-- to top button -->
-    <button id="topbtn" title="Go to top" onclick="topFunction()">Top</button>
+    <button id="topbtn" title="Go to top" onclick="topFunction()">^</button>
     <div class="grid-container">
         <!-- 
             HEADER
@@ -335,6 +335,11 @@
             FOOTER
                     -->
         <div class="footer-container">
+            <div class="bp-container frost">
+                <a class="content-bp1 bp-title" href="./bp2.html">Dockerizing Applications</a>
+                <a class="bp-date-author" href="./bp1.html">Apr. 9, 2023</a>
+            </div>
+            <div class="line-spacer"></div>
             <div class="socials-grid-container">
                 <div class="github">
                     <a href="https://www.github.com/karstenmonteiro/" target="_blank" title="Github"><img class="social" src="../imgs/socials/github-icon.png"></a>
@@ -373,7 +378,7 @@
         
         // Add a margin to the bottom of the button so it doesn't overlay the footer when user scrolls to the bottom of the page
         if ((window.innerHeight + window.scrollY) > height || document.documentElement.scrollTop > height) {
-            topbtn.style.marginBottom = "80px";
+            topbtn.style.marginBottom = "180px";
             topbtn.style.transition = "margin-bottom .8s"
         } else {
             topbtn.style.marginBottom = "0";
@@ -382,7 +387,7 @@
 
     // When the user clicks on the button, scroll to the top of the document
     function topFunction() {
-        window.scrollTo(0, 200);
+        window.scrollTo(0, 0);
     }
 
 // enlarge/reset images on click
