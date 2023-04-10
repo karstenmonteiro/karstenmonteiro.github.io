@@ -20,9 +20,9 @@
                     -->
         <div class="header-grid-container">
             <!-- header logo -->
-            <div class="header-logo-container">
+            <!-- <div class="header-logo-container">
                 <a href="https://karstenmonteiro.github.io"><img class="header-logo" src="/imgs/logo.webp" alt="kmDev logo"></a>
-            </div>
+            </div> -->
             <!-- header titles -->
             <div class="header-titles-grid-container">
                 <div class="header-title">
@@ -36,14 +36,14 @@
         <!--
             BLOG POST
                             -->
-        <div class="post-container">
+        <div class="post-container" id="postcontainer">
             <div class="post-header-container">
                 <div class="post-header">
                     <h1 class="post-header-title">Getting Started with Docker</h1>
                     <h5 class="post-header-date-author">Feb. 26, 2023 | Karsten M.</h5>
                 </div>
             </div>
-            <div class="post-content">
+            <div class="post-content" id="postcontent">
                 <div id="intro">
                     <p>
                         For the past few weeks, I have been learning the "ins" and "outs" of Docker. I chose Docker as my topic because I’ve always heard a lot about it, so I have become very curious and have desired to learn more about containerizing applications. Of course, there were other container management software available that I could have chosen, but Docker is known to be the number one container management software and many major cloud providers, like AWS, have implemented Docker into their systems. Making it easy and seamless to deploy in any environment. This blog post covers what Docker is, what containers are, Docker-Compose. Docker CLI Basics, and more.
@@ -262,7 +262,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <code>docker image pull &ltimage&gt</code>
+                                <code style="padding: 1px 6px;">docker image pull &ltimage&gt</code>
                             </td>
                             <td>
                                 Pulls image fromm docker registry.
@@ -270,7 +270,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <code>docker image rm &ltimage&gt</code>
+                                <code style="padding: 1px 6px;">docker image rm &ltimage&gt</code>
                             </td>
                             <td>
                                 Removes an image.
@@ -278,7 +278,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <code>docker image ls</code>
+                                <code style="padding: 1px 6px;">docker image ls</code>
                             </td>
                             <td>
                                 Lists all images.
@@ -286,7 +286,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <code>docker container run &ltimage&gt</code>
+                                <code style="padding: 1px 6px;">docker container run &ltimage&gt</code>
                             </td>
                             <td>
                                 Runs a container from an image.
@@ -294,7 +294,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <code>docker container stop &ltcontainer&gt</code>
+                                <code style="padding: 1px 6px;">docker container stop &ltcontainer&gt</code>
                             </td>
                             <td>
                                 Stops a container.
@@ -302,7 +302,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <code>docker container rm &ltcontainer&gt</code>
+                                <code style="padding: 1px 6px;">docker container rm &ltcontainer&gt</code>
                             </td>
                             <td>
                                 Removes a container.
@@ -310,7 +310,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <code>docker container ls -a</code>
+                                <code style="padding: 1px 6px;">docker container ls -a</code>
                             </td>
                             <td>
                                 Lists all containers.
@@ -318,7 +318,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <code>docker container exec &ltcontainer&gt</code>
+                                <code style="padding: 1px 6px;">docker container exec &ltcontainer&gt</code>
                             </td>
                             <td>
                                 Executes a commmand inside the container.
@@ -384,6 +384,88 @@
     function topFunction() {
         window.scrollTo(0, 200);
     }
+
+// enlarge/reset images on click
+let images = document.querySelectorAll('img');
+let divs = document.querySelectorAll('div');
+let paras = document.querySelectorAll('p');
+let spans = document.querySelectorAll('span');
+let links = document.querySelectorAll('a');
+let codes = document.querySelectorAll('code');
+
+images.forEach((item) => {
+
+    let currentImg = item;
+
+    let onHover = () => {
+        currentImg = item;
+
+        item.style.cursor = "pointer";
+        item.style.opacity = "80%";
+        item.style.transition = "all .5s ease";
+    }
+
+    let onClick = () => {
+        item.style.scale = "1.6";
+        item.style.opacity = "100%";
+        document.getElementById("postcontainer").style.overflow = "visibile";
+        document.getElementById("postcontent").style.backgroundColor = "#191919";
+        document.getElementById("postcontent").style.transition = "all .3s ease";
+
+        divs.forEach((item) => {
+            item.style.color = "#191919";
+        });
+        paras.forEach((item) => {
+            item.style.color = "#191919";
+        });
+        spans.forEach((item) => {
+            item.style.color = "#191919";
+        });
+        links.forEach((item) => {
+            item.style.color = "#191919";
+        });
+        codes.forEach((item) => {
+            item.style.color = "#191919";
+        });
+        images.forEach((item) => {
+            if (item != currentImg) {
+                item.style.opacity = "0%";
+            }
+        });
+        
+    }
+
+    let onLeaveReset = () => {
+        item.style.cursor = "normal";
+        item.style.scale = "1";
+        item.style.opacity = "100%";
+        item.style.transition = "all .5s ease";
+        document.getElementById("postcontent").style.backgroundColor = "#f0f0f0";
+
+        divs.forEach((item) => {
+            item.style.color = "";
+        });
+        paras.forEach((item) => {
+            item.style.color = "";
+        });
+        spans.forEach((item) => {
+            item.style.color = "";
+        });
+        links.forEach((item) => {
+            item.style.color = "";
+        });
+        codes.forEach((item) => {
+            item.style.color = "";
+        });
+        images.forEach((item) => {
+            item.style.opacity = "100%";
+        });
+    }
+
+    item.addEventListener('mouseover', onHover);
+    item.addEventListener('mouseleave', onLeaveReset);
+    item.addEventListener('click', onClick);
+});
 </script>
 </body>
 </html>

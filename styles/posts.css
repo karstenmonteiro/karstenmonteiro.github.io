@@ -43,7 +43,7 @@ body, html {
         'header'
         'post'
         'footer';
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: auto 1fr auto;
     min-height: 100%;
     /* gradient bg */
     background: linear-gradient(-45deg, #652787, #431a5a, #173157, #224d80);
@@ -69,21 +69,20 @@ body, html {
     display: grid;
     grid-template-areas:
         'logo titles';
-    grid-template-columns: 0fr 1fr;
-    padding-bottom: 10px;
+    grid-template-columns: 0fr 0fr;
+    padding: 4px 6px;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     background-color: #191919;
 }
-    /* header logo */
-    .header-logo-container {
+    /* .header-logo-container {
         grid-area: 'logo';
     }
         .header-logo {
             width: 110px;
             height: 110px;
             padding: 10px;
-        }
+        } */
     /* header titles */
     .header-titles-grid-container {
         display: grid;
@@ -94,9 +93,21 @@ body, html {
         grid-area: 'titles';
         margin-top: auto;
         margin-bottom: auto;
+        padding: 15px;
+        padding-top: 0;
     }
+        .header-logo-container {
+            margin: auto 0;
+            margin-right: -6px;
+        }
+            .header-logo {
+                width: 55px;
+                height: 55px;
+                margin: 0;
+                padding: 0;
+            }
         .header-title {
-            margin-bottom: -15px;
+            margin-bottom: -14px;
         }
             /* header title text */
             .header-title-text {
@@ -104,7 +115,7 @@ body, html {
                 /* typography */
                 color: #f0f0f0;
                 font-family: 'Open Sans', sans-serif;
-                font-size: 80px;
+                font-size: 50px;
                 font-weight: 800;
                 text-decoration: none;
             }
@@ -114,10 +125,16 @@ body, html {
                 /* typography */
                 color: #f0f0f0;
                 font-family: 'Open Sans', sans-serif;
-                font-size: 18px;
+                font-size: 12px;
                 font-weight: 500;
                 font-style: italic;
                 text-decoration: none;
+            }
+            .more-posts {
+                grid-area: 'more';
+                width: 800px;
+                margin-top: auto;
+                margin-bottom: auto;
             }
 
 /*
@@ -134,9 +151,17 @@ body, html {
 @media only screen and (max-width: 900px) {
     .post-container {
         grid-area: 'post';
-        max-width: 900px;
+        max-width: 600px;
         margin: 0px auto 40px auto;
-        padding: 0 40px;
+        /* padding: 0 40px; */
+    }
+    pre {
+        font-size: 12px;
+    }
+}
+@media only screen and (max-width: 580px) {
+    pre {
+        font-size: 9px;
     }
 }
     /*
@@ -177,6 +202,7 @@ body, html {
         padding: 15px 40px 15px 40px;
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
+        color: #191919;
     }
         .demo-link-txt {
             font-weight: 700;
@@ -201,8 +227,8 @@ body, html {
             background-color: #19191920;
             width: fit-content;
             margin: 0 auto;
-            padding: 2px 4px;
-            border-radius: 2px;
+            padding: 3px 6px;
+            border-radius: 4px;
             /* typography */
             color:#652787;
             font-family: 'Source Code Pro', monospace;
@@ -214,7 +240,7 @@ body, html {
                 width: fit-content;
                 margin: 0 auto;
                 padding: 1px 10px;
-                border-radius: 2px;
+                border-radius: 8px;
                 /* typography */
                 color:#652787;
                 font-family: 'Source Code Pro', monospace;
@@ -224,15 +250,28 @@ body, html {
         /* centers img */
         .img-container {
             display: flex;
-            margin: 10px 0;
             justify-content: center;
         }
             img {
                 width: 100%;
-                margin: 10px 0;
+                margin: 15px;
+                border-radius: 8px;
             }
             .ol-img {
                 margin-left: -40px;
+            }
+        .note-head {
+            color: crimson;
+            font-size: 15px;
+            font-weight: 700;
+            font-style: italic;
+            text-decoration: underline;
+        }
+            .note-text {
+                color: crimson;
+                font-size: 15px;
+                font-weight: 500;
+                font-style: italic;
             }
         a {
             /* typography */
@@ -276,13 +315,15 @@ body, html {
         ul {
             margin: 3px 0;
         }
+            .li-bold {
+                font-weight: 600;       
+            }
         p, li {
             margin: 0;
             /* typography */
             font-family: 'Open Sans', sans-serif;
             font-size: 16px;
         }
-
     table {
         margin-left: auto;
         margin-right: auto;
