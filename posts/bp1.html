@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles/posts.css">
+<link rel="icon" type="image/x-icon" href="../imgs/favicon.png">
+<title>Getting Started with Docker | kmDev</title>
+</head>
+<body>
+    <!-- to top button -->
+    <button id="topbtn" title="Go to top" onclick="topFunction()">Top</button>
+    <div class="grid-container">
+        <!-- 
+            HEADER
+                    -->
+        <div class="header-grid-container">
+            <!-- header logo -->
+            <div class="header-logo-container">
+                <a href="https://karstenmonteiro.github.io"><img class="header-logo" src="/imgs/logo.webp" alt="kmDev logo"></a>
+            </div>
+            <!-- header titles -->
+            <div class="header-titles-grid-container">
+                <div class="header-title">
+                    <a class="header-title-text" href="https://karstenmonteiro.github.io">kmDev</a>
+                </div>
+                <div class="header-sub-title">
+                    <a class="header-sub-title-text" href="https://karstenmonteiro.github.io">Rising technology trends, & more.</a>
+                </div>
+            </div>
+        </div>
+        <!--
+            BLOG POST
+                            -->
+        <div class="post-container">
+            <div class="post-header-container">
+                <div class="post-header">
+                    <h1 class="post-header-title">Getting Started with Docker</h1>
+                    <h5 class="post-header-date-author">Feb. 26, 2023 | Karsten M.</h5>
+                </div>
+            </div>
+            <div class="post-content">
+                <div id="intro">
+                    <p>
+                        For the past few weeks, I have been learning the "ins" and "outs" of Docker. I chose Docker as my topic because I’ve always heard a lot about it, so I have become very curious and have desired to learn more about containerizing applications. Of course, there were other container management software available that I could have chosen, but Docker is known to be the number one container management software and many major cloud providers, like AWS, have implemented Docker into their systems. Making it easy and seamless to deploy in any environment. This blog post covers what Docker is, what containers are, Docker-Compose. Docker CLI Basics, and more.
+                    </p>
+                    <h4>Quick Links:</h4>
+                    <br>
+                    <ul id="quicklinks">
+                        <li><a href="#what-is-docker" title="What is Docker?"><i>What is Docker?</i></a></li>
+                        <li><a href="#why-docker" title="Why use Docker?"><i>Why use Docker?</i></a></li>
+                        <li><a href="#containers" title="What are Containers?"><i>Containers</i></a></li>
+                        <li><a href="#docker-compose" title="Docker Compose"><i>Docker Compose</i></a></li>
+                        <li><a href="#docker-cli-basics" title="Docker CLI Basics"><i>Docker CLI Basics</i></a></li>
+                    </ul>
+                </div>
+                <br>
+                <div id="what-is-docker">
+                    <h2>What is Docker?</h2>
+                        <p class="definition">Docker is an open-source platform that gives users the ability to build, test, share, update, manage, and deploy applications quickly and reliably using containers, making development efficient and predictable.</p>
+                        <br>
+                        <p>Docker uses containers to package applications, along with all its dependencies and required resources to run it, into lightweight, standardized, executable units of software. Utilized throughout the development lifecycle, Docker simplifies the tedious and repetitive process of configuration, facilitating rapid, effortless, and portable application development. With Docker, you can build and test your applications on your local machine, and then easily and efficiently deploy them to production. Additionally, Docker provides tools for managing and orchestrating containers (which we will discuss more later), making it easier to scale and manage large, complex applications. It also gives developers the ability to deploy multiple, separate containers independently and even in different languages (if desired). Running multiple containers independently helps reduce the risk of conflict between languages, libraries, or frameworks.
+                    </p>
+                    <br>
+                    <P>
+                        Docker works by utilizing the client-server technology, called the docker engine. The docker engine is responsible for running Docker components and services and consists of three primary services, which include:
+                    </P>
+                    <ul>
+                        <li>A server that runs the Docker daemon process</li>
+                        <li>APIs that are used to communicate and instruct the Docker daemon, and</li>
+                        <li>A command-line interface (CLI) for interacting with Docker</li>
+                    </ul>
+                    <p>
+                        The Docker daemon is responsible for creating and managing containers, images, volumes, and networks. Overall, Docker makes it very simple to create and manage containers that can be quickly deployed and scaled into any environment, reliably. Docker can be easily downloaded and installed on multiple platforms <a href="https://docs.docker.com/get-docker/" target="_blank" style="color: cornflowerblue; text-decoration: underline;">here</a>.
+                    </p>
+                </div>
+                <div id="why-docker">
+                    <h3 class="title">Why use Docker?</h3>
+                    <p>
+                        Docker is widely loved by many developers and major cloud providers and is known to be the best/most popular container management software out there. Major cloud providers such as AWS, GCP, and Azure have all implemented Docker into their systems and also provide support. Because of this, you can seamlessly deploy containers on <i>any</i> environment.
+                    </p>
+                    <p>Some benefits that Docker offers include:</p>
+                    <ul>
+                        <li>Improved scalability</li>
+                        <li>Reduced operational/infrastructure costs</li>
+                        <li>The ability to ship an application anywhere</li>
+                        <li>Simplified/rapid software deployment</li>
+                        <li>Faster/more efficient testing</li>
+                        <li>Portability</li>
+                        <li>Efficiency</li>
+                    </ul>
+                    <p>
+                        and <i>many</i> more.
+                    </p>
+                </div>
+                <br>
+                <div id="containers">
+                    <h2 class="title">What are Containers?</h2>
+                    <p>
+                        Containers are portable, lightweight, executable, standardized units of software that isolate an application by packaging it up, along with all of its dependencies and required resources to run it.
+                    </p>
+                    <br>
+                    <p class="no-indent">
+                        <b><u>Containers are secure.</u></b> Any applications packaged into a container are automatically safer as Docker is known to provide one of the strongest default isolation capabilities in the industry.
+                    </p>
+                    <br>
+                    <p class="no-indent">
+                        <b><u>Containers are isolated from other containers</u></b> to prevent interference, and each container runs its own software, binaries, configurations, etc.
+                    </p>
+                    <br>
+                    <p>
+                        A container can also be described as a runnable instance of an image, as containers are created from container images and are used to build, share, and run your applications. You can create, start, stop, move, or delete a container using the CLI or APIs. Containers run quickly, consistently, and reliably, in any environment, such as:
+                    </p>
+                    <ul>
+                        <li>Windows, Mac, and Linux</li>
+                        <li>Virutal machines</li>
+                        <li>Data centers</li>
+                        <li>The cloud</li>
+                        <li>Serverless environments</li>
+                        <li>Design, Testing, Staging, and Production</li>
+                    </ul>
+                    <p class="no-indent">
+                        and <i>many</i> more. Multiple containers can run on the same machine, each running as an isolated process in the user space and will share the machine’s operating system kernel between each other. Therefore, they do not require an operating system for each application, which increases server efficiency and reduces server and licensing costs. 
+                    </p>
+                    <h3>Container Images</h3>
+                    <p>
+                        Containers use an isolated custom filesystem when they are running. Container images provide containers with this filesystem and because of this, the image must contain everything that’s required to run your application. This includes all dependencies, configuration settings, binaries, system libraries, utilities, etc. They also contain the environment variables and other metadata. Container images are built in layers, starting with a base image and adding new layers on top of it, if desired, and should be thought of as immutable, as they cannot be changed after they’re created. 
+                    </p>
+                    <br>
+                    <p class="no-indent">
+                        You can list all your container images in the command-line with <code>docker image ls</code>, for example:
+                    </p>
+                    <div class="img-container">
+                        <img src="../imgs/blogpost1/imageLS-ex.png">
+                    </div>
+                    <p>
+                        Containers are created from container images at runtime on the Docker engine, and container images are built from a file called a Dockerfile, which is parsed when you build an image. A dockerfile is a text-based file with no file extension and contains the set of instructions used to build a container image and looks something like this:
+                    </p>
+                    <div class="img-container">
+                        <img src="../imgs/blogpost1/dockerfile-ex.png">
+                    </div>
+                    <h3>Container Volumes</h3>
+                    <p>
+                        While containers can create, update, and delete, any changes made to the container will be lost when the container is removed. The solution for this is <b>container volumes</b>.
+                    </p>
+                    <br>
+                    <p>
+                        Volumes provide the ability to connect specific filesystem paths in the container with the host machine. Therefore, if a directory in the container is mounted, any changes to it can be seen on the host machine. Volumes can also be used to share files between containers.
+                    </p>
+                    <h3>Multi-Container Applications</h3>
+                    <p>
+                        Let’s say you’ve been working on your single container application, and you are now ready to implement a MySQL database. You may be wondering: 
+                    </p>
+                    <br>
+                    <p>
+                        <b><i>"Where do I run MySQL? Do I run it in the same container or do I run it separately?"</i></b>
+                    </p>
+                    <br>
+                    <p class="no-indent">
+                        The answer is simple. <b><u>Each container should be focused on doing one thing only.</u></b> This is because:
+                    </p>
+                    <ul>
+                        <li>A container only starts one process, so a process manager would be required to run multiple processes which would then add complexity to the startup/shutdown of containers</li>
+                        <li>Having separate containers enables you to version and update versions in isolation</li>
+                        <li>It’s most likely that you would have to scale databases differently than other processes</li>
+                    </ul>
+                    <h3>Container Networking</h3>
+                    <p>
+                        As discussed earlier, Containers run in isolation, so they don’t have the ability to communicate with one another, even if they’re on the same machine. This can be resolved with <b>networking</b>.
+                    </p>
+                    <br>
+                    <p class="no-indent">
+                        <b><i>If two containers are on the same network, they can communicate with each other. Otherwise, they cannot.</i></b>
+                    </p>
+                    <br>
+                    <p class="no-indent">
+                        Containers can be added to a network by either:
+                    </p>
+                    <ul>
+                        <li><b>Creating a network and assigning it to a container at startup</b>, or </li>
+                        <li><b>Connecting it to an existing container</b></li>
+                    </ul>
+                    <p class="no-indent">
+                        The following code demonstrates the first option. It starts by creating a network, then attaches a container to the newly created network. All done at startup.
+                    </p>
+                    <br>
+                    <p class="no-indent">
+                        <b>1. Create the network.</b> This will return the network id.
+                    </p>
+                    <div class="img-container">
+                        <img src="../imgs/blogpost1/create-network-ex.png">
+                    </div>
+                    <p class="no-indent">
+                        <b>2. Start a MySQL container and attach it to the network.</b> This will return the MySQL container id.
+                    </p>
+                    <div class="img-container">
+                        <img src="../imgs/blogpost1/mysql-container-ex.png" class="center" style="width: 500px;">
+                    </div>
+                    <p class="no-indent">
+                        <b>3. Confirm the database is up and running, connect to the database and verify it connects.</b> (The password for MySQL is <b><i>“secret”</i></b>)
+                    </p>
+                    <div class="img-container">
+                        <img src="../imgs/blogpost1/mysql-login-ex.png">
+                    </div>
+                    <p class="no-indent">
+                        <b>4. Run the following command and verify your database is in the list</b>
+                    </p>
+                    <div class="img-container">
+                        <img src="../imgs/blogpost1/show-db-ex.png" class="center">
+                    </div>
+                </div>
+                <br>
+                <div id="docker-compose">
+                    <h2 class="title">Docker Compose</h2>
+                    <p>
+                        Docker Compose is a tool for managing and running multi-container applications. <b>Docker Compose can:</b>
+                    </p>
+                    <ul>
+                        <li>Have multiple isolated environments on a single host</li>
+                        <li>Support variables and moving a composition between environments</li>
+                        <li>Preserve volume data when containers are created</li>
+                        <li>Only recreate containers that have changed</li>
+                    </ul>
+                    <p class="no-indent">
+                        To start with Compose, you need to create a YAML file to configure your application’s services. Then, you create and start the services from the configuration file by executing just a single command. Like Docker, Docker Compose also works in all environments. It also has commands for managing your applications such as:
+                    </p>
+                    <ul>
+                        <li>Starting and stopping services</li>
+                        <li>Viewing the status/and or streaming the log output of running services</li>
+                        <li>Rebuilding services, etc.</li>
+                    </ul>
+                    <p class="no-indent">
+                        Docker Compose can be installed <a href="https://docs.docker.com/compose/install/" target="_blank" style="color: cornflowerblue; text-decoration: underline;">here</a>.
+                    </p>
+                </div>
+                <br>
+                <div id="docker-cli-basics">
+                    <h2 class="title">Docker CLI Basics</h2>
+                    <p>
+                        The command line interface (CLI) is used to interact with the Docker engine, which as mentioned above (earlier) consists of <b>three primary services</b>:
+                    </p>
+                    <ul>
+                        <li>A server that runs the Docker daemon process </li>
+                        <li>APIs that are used to communicate and instruct the Docker daemon</li>
+                        <li>A command-line interface (CLI) for interacting with Docker</li>
+                    </ul>
+                    <p class="no-indent">
+                        When a command, <i>i.e.,</i> <code>docker container run</code> is executed, the client sends a request through the API, to the Docker daemon, which then handles the request. 
+                    </p>
+                    <p class="no-indent">
+                        Some of the most used commmands include:
+                    </p>
+                    <br>
+                    <table>
+                        <tr>
+                            <th>Commmand</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>docker image pull &ltimage&gt</code>
+                            </td>
+                            <td>
+                                Pulls image fromm docker registry.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>docker image rm &ltimage&gt</code>
+                            </td>
+                            <td>
+                                Removes an image.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>docker image ls</code>
+                            </td>
+                            <td>
+                                Lists all images.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>docker container run &ltimage&gt</code>
+                            </td>
+                            <td>
+                                Runs a container from an image.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>docker container stop &ltcontainer&gt</code>
+                            </td>
+                            <td>
+                                Stops a container.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>docker container rm &ltcontainer&gt</code>
+                            </td>
+                            <td>
+                                Removes a container.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>docker container ls -a</code>
+                            </td>
+                            <td>
+                                Lists all containers.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>docker container exec &ltcontainer&gt</code>
+                            </td>
+                            <td>
+                                Executes a commmand inside the container.
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <p class="no-indent">You can visit the official Docker docs <a href="https://docs.docker.com/engine/reference/commandline/cli/" target="_blank" style="color: cornflowerblue; text-decoration: underline;">here</a> for more information.</p>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <!--
+            FOOTER
+                    -->
+        <div class="footer-container">
+            <div class="socials-grid-container">
+                <div class="github">
+                    <a href="https://www.github.com/karstenmonteiro/" target="_blank" title="Github"><img class="social" src="../imgs/socials/github-icon.png"></a>
+                </div>
+                <div class="spacer-w20"></div>
+                <div class="linkedin">
+                    <a href="https://www.linkedin.com/in/karstenmonteiro/" target="_blank" title="Linkedin"><img class="social" id="linkedin" src="../imgs/socials/linkedin-icon.png"></a>
+                </div>
+                <div class="spacer-w20"></div>
+                <div class="email">
+                    <a href="mailto: karsten.monteiro@edu.sait.ca" target="_blank" title="Email"><img class="social" src="../imgs/socials/mail-icon.webp"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- 'back to top' BUTTON FUNCTIONALITY -->
+<script>
+    let topbtn = document.getElementById("topbtn");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        // Display/hide the 'to top button' based on where the user is in the page
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            topbtn.style.display = "block";
+        } else {
+            topbtn.style.display = "none";
+        }
+
+        // get page height
+        var body = document.body, html = document.documentElement;
+        var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+        
+        // Add a margin to the bottom of the button so it doesn't overlay the footer when user scrolls to the bottom of the page
+        if ((window.innerHeight + window.scrollY) > height || document.documentElement.scrollTop > height) {
+            topbtn.style.marginBottom = "80px";
+            topbtn.style.transition = "margin-bottom .8s"
+        } else {
+            topbtn.style.marginBottom = "0";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        window.scrollTo(0, 200);
+    }
+</script>
+</body>
+</html>

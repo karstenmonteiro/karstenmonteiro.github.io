@@ -1,0 +1,8 @@
+favicon.png:
+    https://www.pngwing.com/en/free-png-ibbjw
+
+gold-docker-whale.jpg:
+    https://unsplash.com/photos/HSACbYjZsqQ
+
+top-btn-icon:
+    https://www.flaticon.com/free-icon/up-arrow_5229139

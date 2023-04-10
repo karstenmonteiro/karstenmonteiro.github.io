@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles/posts.css">
+<link rel="icon" type="image/x-icon" href="../imgs/favicon.png">
+<title>Dockerizing Applications | kmDev</title>
+</head>
+<body>
+    <!-- to top button -->
+    <button id="topbtn" title="Go to top" onclick="topFunction()">Top</button>
+    <div class="grid-container">
+        <!-- 
+            HEADER
+                    -->
+        <div class="header-grid-container">
+            <!-- header logo -->
+            <div class="header-logo-container">
+                <a href="https://karstenmonteiro.github.io"><img class="header-logo" src="/imgs/logo.webp" alt="kmDev logo"></a>
+            </div>
+            <!-- header titles -->
+            <div class="header-titles-grid-container">
+                <div class="header-title">
+                    <a class="header-title-text" href="https://karstenmonteiro.github.io">kmDev</a>
+                </div>
+                <div class="header-sub-title">
+                    <a class="header-sub-title-text" href="https://karstenmonteiro.github.io">Rising technology trends, & more.</a>
+                </div>
+            </div>
+        </div>
+        <!--
+            BLOG POST
+                            -->
+        <div class="post-container" id="post-container">
+            <div class="post-header-container">
+                <div class="post-header">
+                    <h1 class="post-header-title">Dockerizing Applications</h1>
+                    <h5 class="post-header-date-author">Apr. 9, 2023</h5>
+                </div>
+            </div>
+            <div class="post-content">
+                <br>
+                <div id="bp2-intro">
+                    <p>In this post, we will cover 2 demonstrations on dockerizing applications. The term <b><i>"dockerizing"</i></b> simply means to containerize a Docker image <i>(the packaged application and all its dependencies)</i> and deploy it with Docker.</p>
+                    <br>
+                    <p>The first demo covers dockerizing static HTML websites using Nginx as the webserver.</p>
+                    <br>
+                    <p>The second demo covers dockerizing a Java runnable jar-based application that is built using a Maven-based Java project. We will also use Maven to build the JAR file.</p>
+                    <h4 id="h4-bp2">Quick Links:</h4>
+                    <br>
+                    <ul id="quicklinks">
+                        <li><a href="#demo1"><i class="demo-link-txt">Demo #1: Dockerizing a Static HTML Site with Nginx</i></a></li>
+                            <li class="demo-link-child"><a href="#d1s1"><i>Step 1 - Create Your Static HTML Website</i></a></li>
+                            <li class="demo-link-child"><a href="#d1s2"><i>Step 2 - Create the Dockerfile</i></a></li>
+                            <li class="demo-link-child"><a href="#d1s3"><i>Step 3 - Build the Docker Image</i></a></li>
+                            <li class="demo-link-child"><a href="#d1s4"><i>Step 4 - Run the Docker Image as a Container</i></a></li>
+                            <li class="demo-link-child"><a href="#d1s5"><i>Step 5 <i>(optional)</i> - Share Your Application</i></a></li>
+                            <li class="demo-link-child"><a href="#additionalresources"><i>Additional Resources</i></a></li>
+                        <li><a href="#demo2"><i class="demo-link-txt">Demo #2: Dockerizing a Java Runnable jar-based Application with Maven</i></a></li>
+                            <li class="demo-link-child"><a href="#d2s1"><i>Step 1 - Create a Maven Project in Eclipse</i></a></li>
+                            <li class="demo-link-child"><a href="#d2s2"><i>Step 2 - Configure the Maven JAR Plugin</i></a></li>
+                            <li class="demo-link-child"><a href="#d2s3"><i>Step 3 - Build the JAR File using Maven</i></a></li>
+                            <li class="demo-link-child"><a href="#d2s4"><i>Step 4 - Create/Build the Dockerfile</i></a></li>
+                            <li class="demo-link-child"><a href="#d2s5"><i>Step 5 - Run the Docker Image as a Container</i></a></li>
+                    </ul>
+                </div>
+                <br><br>
+            <!-- DEMO 1 -->
+                <div id="demo1">
+                    <h2><i>Demo #1:</i> Dockerizing a Static HTML Site with Nginx</h2>
+                    <br>
+                    <p>Static HTML websites are, in my opinion, the simplest applications to dockerize as they only consist of a series of HTML files <i>(one for each page on the website)</i>, CSS for styling, and maybe some JavaScript<i>—very simple</i>. Although static websites are nearly obsolete, and most are dynamic nowadays, I thought that, due to their sheer lack of complexity, this would be a good starting point for demonstration purposes.</p>
+                    <br>
+                    <p>In this demo, we will containerize a static HTML website and deploy it with Docker and Nginx as the web server.</p>
+                    <br>
+                    <!-- step 1 -->
+                    <div class="demo-step-container" id="d1s1">
+                        <div class="step-header"><span class="step-text">Step 1 -</span> Create Your Static HTML Website</div>
+                        <br>
+                        <p>To begin, start by creating your static HTML website and store it in your local directory of choice. Below is an example the file structure of my blog, which I will be using as my static website for this demo:</p>
+                        <div class="img-container" id="img">
+                            <img src="../imgs/blogpost2/demo1/kmdev-file-structure.png" style="width:20%;">
+                        </div>
+                    </div>
+                    <!-- step 2 -->
+                    <div class="demo-step-container" id="d1s2">
+                        <div class="step-header"><span class="step-text">Step 2 -</span> Create the Dockerfile</div>
+                        <br>
+                        <p>Next, you’re going to need to create the Dockerfile. The Dockerfile is simply a text file that contains the instructions/commands, provided by the developer, for building custom Docker images via the command line. It typically starts with a <b><i>base image</b>—a pre-built image that provides a starting point for the new custom image and usually contains an application server, an operating system, or any other dependencies required for the new image—</i>on which layers are added, each corresponding to a specific instruction in the Dockerfile. You can find all available Docker images <a href="https://hub.docker.com/search?q=&type=image&image_filter=official" target="_blank">here</a>.</p>
+                        <br>
+                        <p>To create the Dockerfile, simply create a new plain text file <i>(no file extension)</i> named <b><i>“Dockerfile”</i></b> at the <b>root of the project folder</b>, as shown below.</p>
+                        <div class="img-container">
+                            <div class="img-container" id="img">
+                                <img src="../imgs/blogpost2/demo1/kmdev-file-structure-with-dockerfile.png">
+                            </div>
+                        </div>
+                        <p>I have created a Dockerfile, at the root of the project folder, with the following instructions:</p>
+                        <br>
+                        <div class="code-block-text">
+                            <pre>FROM nginx:alpine
+COPY . /usr/share/nginx/html</pre>
+                        </div>
+                        <br>
+                        <p>For this demo we are using Nginx as our webserver, so we want to pull the <span class="code-text"><i>nginx:alpine</i></span> image to our machine to use as our base image. This is done on <b>line 1</b>, using the <span class="code-text">FROM</span> command.</p>
+                        <br>
+                        <p>Following the first instruction, the <span class="code-text">COPY</span> command is used to create our first new layer by copying the contents of our current working directory <i>(represented by <b>"."</b>)</i> to <b><i>/usr/share/nginx/html</i></b> inside the container provided by our base image <i>(<span class="code-text">nginx:alpine</span>)</i>.</p>
+                    </div>
+                    <br>
+                    <!-- step 3 -->
+                    <div class="demo-step-container" id="d1s3">
+                        <div class="step-header"><span class="step-text">Step 3 -</span> Build the Docker Image </div>
+                        <br>
+                        <p>Now that we have a Dockerfile with a set of instructions, we can use it to build our custom Docker image <i>(a.k.a. container image)</i> by executing the following command:</p>
+                        <br>
+                        <div class="code-text">docker build –t static-html-nginx:v1 .</div>
+                        <br>
+                        <p>Executing the build command informs Docker to execute the set of instructions/commands we defined in the Dockerfile which builds our image. Our application and all of its dependencies are packaged up into the Docker image and is assigned a unique ID number by Docker, that can later be used to reference the image. However, these ID numbers are <i>long</i> and <i>complex</i>.</p>
+                        <br>
+                        <p>Luckily for us, Docker provides an option to <b>tag the image</b> <i>(give it a more human-readable name)</i> using the <span class="code-text">–t</span> option followed by your chosen name <i>(can be anything)</i>. For demo purposes, I renamed it to <b><i>"</i></b><span class="code-text"><i>static-html-nginx:v1</i></span><b><i>"</i></b>, where <b><i>"</i></b><span class="code-text"><i>v1</i></i></span><b><i>"</i></b> represents the version.</p>
+                        <br>
+                        <p>Finally, we need to specify the path to where the Dockerfile is located. In our case, it’s in the <b><i>current working directory</i></b>, which is represented by <b><i>"<span class="code-text">.</span>"</i></b>.</p>
+                        <br>
+                        <p>After executing this command, you should see output like below:</p>
+                        <div class="img-container">
+                            <div class="img-container" id="img">
+                                <img src="../imgs/blogpost2/demo1/build-img-output.png">
+                            </div>
+                        </div>
+                        <p>You can verify that the image was built executing the following command <i>(displays all available images)</i>:</p>
+                        <br>
+                        <p class="code-text">docker images</p>
+                        <br>
+                        <p>You should see something like:</p>
+                        <div class="img-container">
+                            <div class="img-container" id="img">
+                                <img src="../imgs/blogpost2/demo1/cmd-verify-img.png">
+                            </div>
+                        </div>
+                        <p>Additionally, if you have <a href="https://docs.docker.com/desktop/" target="_blank">Docker Desktop</a>, you can verify that the image was built by checking the <b><i>"Images"</i></b> section and you should see the image:</p>
+                        <div class="img-container">
+                            <div class="img-container" id="img">
+                                <img src="../imgs/blogpost2/demo1/docker-desktop-verify-img.png">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- step 4 -->
+                    <div class="demo-step-container" id="d1s4">
+                        <div class="step-header"><span class="step-text">Step 4 -</span> Run the Docker Image as a Container</div>
+                        <br>
+                        <p>A Docker container can be run by executing the <span class="code-text">docker run</span> command, followed by the <b><i>container id number</i></b>, or the <b><i>tag you defined for it</i></b>. It’s <i>important</i> to note that, when running a Docker image <i>(the packed application and its dependencies)</i> in a container, it <i>isn’t</i> able to <b><i>directly access</i> resources</b>, such as network ports, as they run in <b><i>isolated environments</i></b>.</p>
+                        <br>
+                        <p>To provide <b><i>direct access</i> to resources</b>, you need to <b>forward a port</b> from your <i>local machine</i> to the <i>port that the container listens for connections on</i>.</p>
+                        <br>
+                        <p>By default, Nginx listens for connections on <b>port 80</b>, therefore, <i>so does the container</i>. So, we need to <b>forward a port from <i>our machine</i> to port 80 in the <i>container</i></b>. We have the freedom to use almost <i>any port</i>, but I usually like to use the same port as the container, if it’s not already in use. That being said, I’m going to forward port 80 from my machine.</p>
+                        <br>
+                        <p>The</b><span class="code-text">-p</span> option is used in the <span class="code-text">docker run</span> command to <b>forward a port</b>, where the port being forwarded from your machine is defined on the <i>left</i>, and the container’s port defined on the <i>right</i>.</p>
+                        <br>
+                        <p>To <b><i>run</i> the container</b> and <b><i>port forward to</i> port 80</b>, execute the following command:</p>
+                        <br>
+                        <p class="code-text">docker run -d -p 80:80 static-html-nginx:v1</p>
+                        <br>
+                        <p>You should see the container id as output:</p>
+                        <div class="img-container">
+                            <div class="img-container" id="img">
+                                <img src="../imgs/blogpost2/demo1/docker-run-output.png">
+                            </div>
+                        </div>
+                        <p>The application should now be running in a container on port 80. You can check by visiting <a href="http://localhost:80/" target="_blank">http://localhost:80/</a></p>
+                    </div>
+                    <br>
+                    <!-- step 5 -->
+                    <div class="demo-step-container" id="d1s5">
+                        <div class="step-header"><span class="step-text">Step 5 -</span> Share your Application <i>(optional)</i></div>
+                        <br>
+                        <p>Now that your application has been Dockerized, you can share it to a <b><i>Docker registry</i></b>, which by default is <a href="https://hub.docker.com/" target="_blank">Docker Hub</a>. This process is very similar to pushing a repository to GitHub. To do so, you will need to:</p>
+                        <br>
+                        <ol class="ol-li">
+                            <li><div class="ol-li-txt">Create a repository on <a href="https://hub.docker.com/" target="_blank">Docker Hub</a> where you will push your image, and</div></li>
+                            <li><div class="ol-li-txt">Make sure the <b>Visibility</b> is set to <b><i>"Public"</i></b></div></li>
+                        </ol>
+                        <br>
+                        <p>For more documentation on sharing your application, you can visit the <a href="https://docs.docker.com/get-started/04_sharing_app/" target="_blank">Docker Docs</a></p>
+                    </div>
+                    <br>
+                    <!-- additional resources -->
+                    <div class="demo-step-container" id="additionalresources">
+                        <div class="step-header"><span class="step-text">Additional Resources</span></div>
+                        <ul id="additionalresources-links">
+                            <li><a href="https://www.docker.com/products/docker-desktop/" target="_blank"><i class="demo-link-subtxt">Download Docker Desktop</i></a></li>
+                            <li><a href="https://hub.docker.com/search?q=&type=image&image_filter=official" target="_blank"><i class="demo-link-subtxt">Available Docker Images</i></a></li>
+                            <li><a href="https://collabnix.com/docker-cheatsheet/" target="_blank"><i class="demo-link-subtxt">Docker Cheat Sheet</i></a></li>
+                            <li><a href="https://kapeli.com/cheat_sheets/Dockerfile.docset/Contents/Resources/Documents/index" target="_blank"><i class="demo-link-subtxt">Dockerfile Cheat Sheet</i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <br><br>
+            <!-- DEMO 2 -->
+                <div id="demo2">
+                    <h2><i>Demo #2:</i> Dockerizing a Java Runnable jar-based Application with Maven</h2>
+                    <br>
+                    <p>Dockerizing a Java runnable jar-based application is a bit more complex than the previous demo. It requires a bit more setup/configuration, and more instruction in the Dockerfile. That being said, it's still fairly simple.</p>
+                    <br>
+                    <p>In this demo, we will use Eclipse to create a simple Java runnable jar-based application with Maven, then containerize and deploy it with Docker. For demonstration purposes, we will create a HelloWorld project.</p>
+                    <br>
+                    <!-- step 1 -->
+                    <div class="demo-step-container" id="d2s1">
+                        <div class="step-header"><span class="step-text">Step 1 -</span> Create a Maven Project in Eclipse</div>
+                        <br>
+                        <p>For those who are unfamiliar with Maven, here’s a quick tutorial on how to create a new Maven project:</p>
+                        <ol>
+                            <li class="ol-li"><div class="ol-li-txt">Open eclipse and goto File > New > Other.</div></li>
+                            <li class="ol-li"><div class="ol-li-txt">Under Maven select Maven Project and click Next.</div></li>
+                            <li class="ol-li"><div class="ol-li-txt">Uncheck the ‘Use default Workspace location’, then chose your workspace and click Next.</div></li>
+                            <li class="ol-li"><div class="ol-li-txt">Select ‘maven-archetype-quickstart' as the archetype and click Next.</div></li>
+                            <div class="img-container ol-img" id="img">
+                                <img src="../imgs/blogpost2/demo2/maven-archetype.png">
+                            </div>
+                            <li class="ol-li"><div class="ol-li-txt">Enter a Group Id (your name/company name) and an Artifact Id (project name), then click Finish.</div></li>
+                            <ul>
+                                <li class="ol-li"><div class="ol-li-txt">Note: the console will prompt you to enter “Y” to continue with creating the project. You will need to enter “y”, followed by the Enter key to continue.</div></li>
+                            </ul>
+                            <li class="ol-li"><div class="ol-li-txt">Navigate to YourProjectName > src > main > java > YourGroupId.ProjectName > App.java and copy and paste the following code for a HelloWorld application:</div></li>
+                            <br>
+                            <div class="code-block-text">
+                                <pre>package KarstenMonteiro.HelloWorld;
+                                    
+public class App {
+    public static void main( String[] args ) {
+        System.out.println( "Hello World!" );
+    }
+}                               </pre>
+                            </div>
+                        </ol>
+                    </div>
+                    <!-- step 2 -->
+                    <div class="demo-step-container" id="d2s2">
+                        <div class="step-header"><span class="step-text">Step 2 -</span> Configure the Maven JAR Plugin</div>
+                        <br>
+                        <p>We will use the Maven plugin, ‘maven-jar-plugin' to build the runnable jar. Make sure to add the following code in pom.xml within the &lt;plugins&gt; tag to enable this plugin. This is the Maven plugin that will generate our runnable jar.</p>
+                        <br>
+                        <div class="code-block-text">
+                            <pre>&lt;plugin> 
+        &lt;artifactId>maven-jar-plugin&lt;/artifactId> 
+        &lt;version>3.0.2&lt;/version>
+        &lt;configuration>
+            &lt;archive>
+                &lt;manifest>
+                    &lt;mainClass>KarstenMonteiro.HelloWorld.App&lt;/mainClass>
+                &lt;/manifest>
+            &lt;/archive>
+        &lt;/configuration>
+    &lt;/plugin>            </pre>
+                    </div>
+                </div>
+                <br>
+                <!-- step 3 -->
+                <div class="demo-step-container" id="d2s3">
+                    <div class="step-header"><span class="step-text">Step 3 -</span> Build the JAR File using Maven</div>
+                    <br>
+                    <p>To generate the JAR file using Maven, simply navigate to the project directory in command prompt and execute: </p>
+                    <br>
+                    <div class="code-text">mvn package</div>
+                    <br>
+                    <p>You should see something like:</p>
+                    <div class="img-container" id="img">
+                        <img src="../imgs/blogpost2/demo2/mvn-package-output.png">
+                    </div>
+                    <p>It will be built in the \target folder of the project.</p>
+                </div>
+                <br>
+                <!-- step 4 -->
+                <div class="demo-step-container" id="d2s4">
+                    <div class="step-header"><span class="step-text">Step 4 -</span> Create/Build the Dockerfile</div>
+                    <br>
+                    <p>You can refer to step 2 in the first demo on how to create a Dockerfile, if you’re unsure. Create the Dockerfile at the root of the project folder. Its contents include the following instructions:</p>
+                    <br>
+                    <div class="code-block-text">
+                        <pre>FROM openjdk:17
+COPY target/HelloWorld-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]</pre>
+                    </div>
+                    <br>
+                    <p>Unlike in the previous Dockerfile we made in the first demo, we’re going to adding the ENTRYPOINT instruction. ENTRYPOINT specifies:</p>
+                    <ul>
+                        <li>the main application,</li>
+                        <li>the command that's executed for this image, and</li>
+                        <li>the location of the JAR file</li>
+                    </ul>
+                    <p>Next, in command prompt at the project directory, build the Docker image by executing:</p>
+                    <br>
+                    <div class="code-text">docker build -t java-runnable-jar:v1 .</div>
+                    <br>
+                    <p>You should see the following as output:</p>
+                    <div class="img-container" id="img">
+                        <img src="../imgs/blogpost2/demo2/build-img-output.png">
+                    </div>
+                    <p>You can verify that the image was built by executing <span class="code-text">docker images</span>:</p>
+                    <div class="img-container" id="img">
+                        <img src="../imgs/blogpost2/demo2/verify-img-cmdprompt.png">
+                    </div>
+                    <p>Or by checking for it in Docker Desktop:</p>
+                    <div class="img-container" id="img">
+                        <img src="../imgs/blogpost2/demo2/verify-img-docker-desktop.png">
+                    </div>
+                </div>
+                <!-- step 5 -->
+                <div class="demo-step-container" id="d2s5">
+                    <div class="step-header"><span class="step-text">Step 5 -</span> Run the Docker Image as a Container</div>
+                    <br>
+                    <p>For this demo, we don’t need to specify any ports as this isn’t deployed to a web server. Simply navigate to the project folder in command prompt and execute the following:</p>
+                    <br>
+                    <div class="code-text">docker run java-runnable-jar:v1</div>
+                    <br>
+                    <p>You should see something like:</p>
+                    <div class="img-container" id="img">
+                        <img src="../imgs/blogpost2/demo2/run-container-output.png">
+                    </div>
+                    <p>Finally, you can share your image to <a href="https://hub.docker.com/" target="_blank">Docker Hub</a>, if you’d like.</p>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+        <!--
+            FOOTER
+                    -->
+        <div class="footer-container">
+            <div class="socials-grid-container">
+                <div class="github">
+                    <a href="https://www.github.com/karstenmonteiro/" target="_blank" title="Github"><img class="social" src="../imgs/socials/github-icon.png"></a>
+                </div>
+                <div class="spacer-w20"></div>
+                <div class="linkedin">
+                    <a href="https://www.linkedin.com/in/karstenmonteiro/" target="_blank" title="Linkedin"><img class="social" id="linkedin" src="../imgs/socials/linkedin-icon.png"></a>
+                </div>
+                <div class="spacer-w20"></div>
+                <div class="email">
+                    <a href="mailto: karsten.monteiro@edu.sait.ca" target="_blank" title="Email"><img class="social" src="../imgs/socials/mail-icon.webp"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+/*
+ * 'back to top' BUTTON FUNCTIONALITY                 
+*/
+const topbtn = document.getElementById("topbtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    // Display/hide the 'to top button' based on where the user is in the page
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        topbtn.style.display = "block";
+    } else {
+        topbtn.style.display = "none";
+    }
+
+    // get page height
+    var body = document.body, html = document.documentElement;
+    var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+    
+    // Add a margin to the bottom of the button so it doesn't overlay the footer when user scrolls to the bottom of the page
+    if ((window.innerHeight + window.scrollY) > height || document.documentElement.scrollTop > height) {
+        topbtn.style.marginBottom = "80px";
+        topbtn.style.transition = "margin-bottom .8s"
+    } else {
+        topbtn.style.marginBottom = "0";
+    }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    window.scrollTo(0, 200);
+}
+</script>
+</body>
+</html>
